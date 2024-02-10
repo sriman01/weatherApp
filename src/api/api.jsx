@@ -38,7 +38,7 @@ async function fetchWeatherData(city, unit) {
 
 fetchWeatherData(city, unit)
     .then(data => {
-        console.log('Forecast Type Data:', data);
+        // console.log('Forecast Type Data:', data);
         return data;
     })
     .catch(error => {

@@ -30,8 +30,8 @@ function Chart({ city, unit }) {
       try {
         const weatherData = await fetchWeatherData(city, unit);
         const { list } = weatherData;
-        console.log(weatherData)
-        console.log(list[0].dt_txt)
+        // console.log(weatherData)
+        // console.log(list[0].dt_txt)
 
         const newData = list?.slice(0, 2)?.concat(list?.slice(10, 11))?.concat(list?.slice(20, 21))?.concat(list?.slice(30, 31)).map((item) => ({
           name: getDayOfWeek(item.dt_txt),
