@@ -8,7 +8,7 @@ import History from './components/history/History';
 import Chart from './components/chart/Chart';
 
 function App() {
-  const [city, setCity] = useState('');
+  const [city, setCity] = useState('Ranchi');
   const [weather, setWeather] = useState({});
   const [unit, setUnit] = useState('metric'); // Default unit is Celsius
   const [show, setShow] = useState('false')

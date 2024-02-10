@@ -18,4 +18,34 @@ const getWeatherSecond = async (city, unit) => {
     })
 }
 
-export  {getWeather, getWeatherSecond};
+
+/**  */
+
+let city = 'ranchi'
+let unit = 'metric'
+
+async function fetchWeatherData(city, unit) {
+    try {
+        const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=${unit}&appid=${apiKey}`);
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error fetching weather data:', error);
+        throw error; // Re-throw the error to handle it elsewhere if needed
+    }
+}
+
+
+fetchWeatherData(city, unit)
+    .then(data => {
+        console.log('Forecast Type Data:', data);
+        return data;
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+
+fetchWeatherData('ranchi', 'metric')
+
+
+export  {getWeather, getWeatherSecond, fetchWeatherData};

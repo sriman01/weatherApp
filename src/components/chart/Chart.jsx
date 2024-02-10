@@ -1,5 +1,5 @@
 import "./chart.css";
-import { getWeatherSecond } from "../../api/api.jsx";
+import { getWeatherSecond, fetchWeatherData } from "../../api/api.jsx";
 import dateFormat from "dateformat";
 import { AreaChart, XAxis, YAxis, CartesianGrid, Tooltip, Area } from "recharts";
 import { useEffect, useState } from "react";
@@ -28,11 +28,13 @@ function Chart({ city, unit }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const weatherData = await getWeatherSecond(city, unit);
+        const weatherData = await fetchWeatherData(city, unit);
         const { list } = weatherData;
+        console.log(weatherData)
+        console.log(list[0].dt_txt)
 
-        const newData = list?.slice(0, 5)?.map((item) => ({
-          name: renderDate(item.dt),
+        const newData = list?.slice(0, 2)?.concat(list?.slice(10, 11))?.concat(list?.slice(20, 21))?.concat(list?.slice(30, 31)).map((item) => ({
+          name: getDayOfWeek(item.dt_txt),
           temp: item.main.temp,
           humidity: item.main.humidity,
           feels_like: item.main.feels_like,
@@ -47,9 +49,14 @@ function Chart({ city, unit }) {
     fetchData();
   }, [city, unit]);
 
-  const renderDate = (dt) => {
-    return dateFormat(dt, "h:MM");
-  };
+
+  function getDayOfWeek(dateString) {
+    const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    const date = new Date(dateString);
+    const dayIndex = date.getDay();
+    return daysOfWeek[dayIndex];
+}
+
 
   return (
     <div className="chart">

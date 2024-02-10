@@ -6,9 +6,7 @@ import MyState from './components/context/myState.jsx'
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
     <MyState>
       <App />
     </MyState>
-  </React.StrictMode>,
 )
