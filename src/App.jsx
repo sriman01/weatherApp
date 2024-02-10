@@ -120,7 +120,7 @@ function App() {
 
           <div className="windstats d-flex">
             <Wind />
-            <p>Wind is {weather.wind.speed} Knots in {weather.wind.deg}&deg;</p>
+            <p>Wind is {weather.wind.speed} {unit === "metric" ? "knots" : "mph"} in {weather.wind.deg}&deg;</p>
           </div>
           <div className="windstats d-flex">
             <p>Humidity {weather.main.humidity}</p>
