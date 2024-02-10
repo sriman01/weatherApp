@@ -1,0 +1,26 @@
+.chart{
+    width: 400px;
+    padding: 25px;
+    color: #e5e5e5;
+    border-radius: 10px;
+    box-shadow: 4px 4px 15px 0px rgba(0,0,0,0.2);
+    background: linear-gradient(108deg,#D4145A, #FBB03B);
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+@media (max-width: 1024px) {
+    .chart {
+        height: 400px;
+        width: 80vw;
+    }
+}
+
+@media (max-width: 640px) {
+    .chart {
+        width: 300px;
+    }
+}
