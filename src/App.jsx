@@ -139,7 +139,7 @@ function App() {
       }
 
       {!weather.weather && <div className="content">
-        <h4>No Data found !</h4>
+        <h4>Enter only valid city Name !</h4>
       </div>}
      <div className=' unitHandler '>
       <button onClick={toggleUnit} disabled={!weather.weather}>
