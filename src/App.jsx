@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import './App.css';
-import { Search, MapPin, Wind, ArrowUp, Droplet, ArrowDown } from 'react-feather';
+import { Search, MapPin, Wind, ArrowUp,  ArrowDown } from 'react-feather';
 import { getWeather } from './api/api';
 import dateFormat from 'dateformat';
 import MyContext from './components/context/myContext';
@@ -13,6 +13,7 @@ function App() {
   const [unit, setUnit] = useState('metric'); // Default unit is Celsius
   const [show, setShow] = useState('false')
   const { history, setHistory}= useContext(MyContext);
+  const [coord, setCoord] = useState({});
 
   useEffect(() => {
     getWeatherbyCity();
@@ -54,6 +55,8 @@ function App() {
     const fetchWeatherData = async () => {
       if (city !== "") {
         const weatherData = await getWeather(city, unit);
+        const { coord:{lat, lon }} = weatherData
+        setCoord({lat, lon})
         setWeather(weatherData);
       }
     };
@@ -141,7 +144,7 @@ function App() {
      </div>
      
     </div>
-      <Chart city = {city} unit={unit} />
+      <Chart city = {city} unit={unit} coord={coord} />
     </div>
   );
 }
