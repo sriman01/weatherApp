@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 
 
 
-function Chart({ city, unit , coord}) {
+function Chart({ city, unit , coord, checker, flag}) {
   const [chartWidth, setChartWidth] = useState(400);
   const [data, setData] = useState([]);
 
@@ -55,6 +55,12 @@ function Chart({ city, unit , coord}) {
       try {
         const weatherData = await fetchWeatherDataThird(coord.lat, coord.lon, unit);
         const { daily } = weatherData;
+
+        if (!checker || !checker.weather) {
+          // Handle case where weather data is undefined or daily data is missing
+          setData([]);
+          return;
+        }
   
         const newData = [];
   
@@ -64,7 +70,7 @@ function Chart({ city, unit , coord}) {
           const min_temp = daily.temperature_2m_min[i];
           const humidity = daily.precipitation_sum[i];
   
-          // console.log("actual data", day_name, max_temp, min_temp, humidity);
+          console.log("actual data", day_name, max_temp, min_temp, humidity);
   
           newData.push({ day_name, max_temp, min_temp, humidity });
         }
@@ -78,7 +84,7 @@ function Chart({ city, unit , coord}) {
   
     fetchData();
   
-  }, [coord.lat, coord.lon, unit]);
+  }, [coord.lat, coord.lon, unit, flag]);
   
 
 

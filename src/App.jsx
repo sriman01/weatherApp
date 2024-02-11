@@ -15,12 +15,15 @@ function App() {
   const { history, setHistory}= useContext(MyContext);
   const [coord, setCoord] = useState({});
 
+  const [flag, setFlag] = useState(false)
+
   useEffect(() => {
     getWeatherbyCity();
   }, []);
 
   const getWeatherbyCity = async () => {
     const weatherData = await getWeather(city, unit);
+    setFlag(prev => !prev)
     setWeather(weatherData);
     if (city.trim() !== '' && !history.includes(city.trim())) {
       setHistory(prevHistory => [city.trim(), ...prevHistory.slice(0, 4)]);
@@ -32,6 +35,7 @@ function App() {
 
   const handleSearch = (searchCity) => {
     setCity(searchCity);
+    setFlag(prev => !prev)
     getWeatherbyCity();
   };
 
@@ -62,7 +66,7 @@ function App() {
     };
 
     fetchWeatherData();
-  }, [unit]); // Run effect whenever unit changes
+  }, [unit, flag]); // Run effect whenever unit changes
   
 
   const handleShow = () => {
@@ -144,7 +148,7 @@ function App() {
      </div>
      
     </div>
-      <Chart city = {city} unit={unit} coord={coord} />
+      <Chart city = {city} unit={unit} coord={coord} checker={weather}  flag = {flag} />
     </div>
   );
 }
